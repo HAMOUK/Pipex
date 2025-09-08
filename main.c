@@ -6,20 +6,16 @@
 /*   By: hlongin <hlongin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/12 13:15:40 by hlongin           #+#    #+#             */
-/*   Updated: 2025/09/08 12:29:03 by hlongin          ###   ########.fr       */
+/*   Updated: 2025/09/08 14:02:51 by hlongin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-#include "pipex.h"
-
-#include "pipex.h"
-
-int		main(int argc, char **argv, char **envp)
+int	main(int argc, char **argv, char **envp)
 {
-	t_px	px;
-	int		status;
+	t_px px;
+	int status;
 
 	if (pars_args(argc, argv, &px))
 		return (EXIT_FAILURE);

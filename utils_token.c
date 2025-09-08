@@ -6,7 +6,7 @@
 /*   By: hlongin <hlongin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 18:28:31 by hlongin           #+#    #+#             */
-/*   Updated: 2025/09/04 12:51:20 by hlongin          ###   ########.fr       */
+/*   Updated: 2025/09/08 14:21:47 by hlongin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	count_tokens(const char *s)
 {
 	int			i;
 	int			count;
-	t_qstate 	q;
+	t_qstate	q;
 
 	if (!s)
 		return (0);
@@ -39,7 +39,7 @@ int	count_tokens(const char *s)
 	{
 		i = skip_blanks(s, i);
 		if (!s[i])
-			break;
+			break ;
 		count++;
 		qstate_init(&q);
 		while (s[i] && (q.in_single || q.in_double || !is_white_space(s[i])))
@@ -64,8 +64,8 @@ int	count_tokens(const char *s)
 
 int	fill_argv(const char *s, char **argv)
 {
-	int		i;
-	int		k;
+	int			i;
+	int			k;
 	t_qstate	q;
 	t_buf		buf;
 
@@ -81,7 +81,10 @@ int	fill_argv(const char *s, char **argv)
 			break ;
 		qstate_init(&q);
 		if (!buf_init(&buf))
+		{
+			free_partial_tab(argv, k);
 			return (0);
+		}
 		while (s[i] && (q.in_single || q.in_double || !is_white_space(s[i])))
 		{
 			if (s[i] == '\'' && !q.in_double)
@@ -91,18 +94,33 @@ int	fill_argv(const char *s, char **argv)
 			else if (s[i] == '\\' && !q.in_single)
 			{
 				if (!s[i + 1] || !handle_backslash(s, &i, &q, &buf))
-					return (buf_free(&buf), 0);
+				{
+					buf_free(&buf);
+					free_partial_tab(argv, k);
+					return (0);
+				}
 			}
 			else if (!buf_push(&buf, s[i]))
-				return (buf_free(&buf), 0);
+			{
+				buf_free(&buf);
+				free_partial_tab(argv, k);
+				return (0);
+			}
 			i++;
 		}
 		if (q.in_single || q.in_double)
-			return (buf_free(&buf), 0);
+		{
+			buf_free(&buf);
+			free_partial_tab(argv, k);
+			return (0);
+		}
 		argv[k] = buf_to_cstr(&buf);
 		buf_free(&buf);
 		if (!argv[k])
+		{
+			free_partial_tab(argv, k);
 			return (0);
+		}
 		k++;
 		argv[k] = NULL;
 	}

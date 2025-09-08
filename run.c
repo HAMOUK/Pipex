@@ -6,7 +6,7 @@
 /*   By: hlongin <hlongin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 12:15:51 by hlongin           #+#    #+#             */
-/*   Updated: 2025/09/08 12:18:09 by hlongin          ###   ########.fr       */
+/*   Updated: 2025/09/08 14:20:31 by hlongin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ int	px_run(t_px *px, char **envp)
 	int		outfd;
 	pid_t	p1;
 	pid_t	p2;
-	int		status;
+	int		status1;
+	int		status2;
 
 	infd = open(px->infile, O_RDONLY);
 	if (infd == -1)
@@ -60,6 +61,7 @@ int	px_run(t_px *px, char **envp)
 		close(outfd);
 		close(pipefd[0]);
 		close(pipefd[1]);
+		waitpid(p1, NULL, 0);
 		perror("fork");
 		return (1);
 	}
@@ -69,9 +71,9 @@ int	px_run(t_px *px, char **envp)
 	close(outfd);
 	close(pipefd[0]);
 	close(pipefd[1]);
-	waitpid(p1, &status, 0);
-	waitpid(p2, &status, 0);
-	if (WIFEXITED(status))
-		return (WEXITSTATUS(status));
+	waitpid(p1, &status1, 0);
+	waitpid(p2, &status2, 0);
+	if (WIFEXITED(status2))
+		return (WEXITSTATUS(status2));
 	return (1);
 }
