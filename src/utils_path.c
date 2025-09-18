@@ -3,34 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   utils_path.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlongin <hlongin@student.s19.be>           +#+  +:+       +#+        */
+/*   By: hlongin <hlongin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 14:01:16 by hlongin           #+#    #+#             */
-/*   Updated: 2025/09/04 14:51:57 by hlongin          ###   ########.fr       */
+/*   Updated: 2025/09/18 12:28:31 by hlongin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-const char 	*px_find_path_value(char **envp)
+const char	*px_find_path_value(char **envp)
 {
-	int		i;
+	int	i;
+
 	if (!envp)
 		return (NULL);
 	i = 0;
 	while (envp[i])
 	{
-			if (!ft_strncmp(envp[i], "PATH=", 5))
-				return (envp[i] + 5);
+		if (!ft_strncmp(envp[i], "PATH=", 5))
+			return (envp[i] + 5);
 		i++;
 	}
-	return (NULL); 
+	return (NULL);
 }
 
-int		px_count_segments(const char *s)
+int	px_count_segments(const char *s)
 {
-	int		count;
-	int		i;
+	int	count;
+	int	i;
 
 	if (!s)
 		return (0);
@@ -46,12 +47,12 @@ int		px_count_segments(const char *s)
 	}
 	return (count);
 }
+
 char	**px_fill_segments(const char *s, int count)
 {
 	char	**tab;
 	int		i;
 	int		start;
-	int		len;
 
 	tab = malloc(sizeof(char *) * (count + 1));
 	if (!tab)
@@ -60,21 +61,8 @@ char	**px_fill_segments(const char *s, int count)
 	start = 0;
 	while (i < count)
 	{
-		len = 0;
-		while (s[start + len] && s[start + len] != ':')
-			len++;
-		if (len == 0)
-			tab[i] = ft_strdup(".");
-		else
-			tab[i] = ft_substr(s, start, len);
-		if (!tab[i])
-		{
-			free_tab(tab);
+		if (!fill_single_segment(s, tab, i, &start))
 			return (NULL);
-		} 
-		start += len;
-		if (s[start] == ':')
-			start++;
 		i++;
 	}
 	tab[i] = NULL;

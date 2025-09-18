@@ -6,7 +6,7 @@
 /*   By: hlongin <hlongin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 16:42:15 by hugolongin        #+#    #+#             */
-/*   Updated: 2025/09/08 11:26:31 by hlongin          ###   ########.fr       */
+/*   Updated: 2025/04/22 15:18:18 by hlongin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,3 +32,20 @@ char	*ft_strdup(const char *s1)
 	s2[i] = '\0';
 	return (s2);
 }
+
+/*#include <stdio.h>
+int main(int argc, char **argv)
+{
+	char *res;
+
+	if (argc == 2)
+	{
+		res = ft_strdup(argv[1]);
+		printf("res = %s\n", res);
+	}
+	else
+	{
+		printf("error");
+	}
+	return 0;
+}*/

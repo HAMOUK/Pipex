@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlongin <hlongin@student.s19.be>           +#+  +:+       +#+        */
+/*   By: hlongin <hlongin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 14:49:56 by hlongin           #+#    #+#             */
-/*   Updated: 2025/09/08 12:26:10 by hlongin          ###   ########.fr       */
+/*   Updated: 2025/09/18 12:28:04 by hlongin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,59 +28,31 @@ char	**px_get_paths(char **envp)
 
 char	*px_find_cmd_path(const char *cmd, char **paths)
 {
-	char	*cand;
-	int		i;
-
 	if (!cmd || !cmd[0])
 		return (NULL);
 	if (has_slash(cmd))
-	{
-		if (access(cmd, X_OK) == 0)
-			return (ft_strdup(cmd));
-		return (NULL);
-	}
+		return (try_command_with_slash(cmd));
 	if (!paths)
 		return (NULL);
-	i = 0;
-	while (paths[i])
-	{
-		cand = build_candidate(paths[i], cmd);
-		if (!cand)
-			return (NULL);
-		if (access(cand, X_OK) == 0)
-			return (cand);
-		free(cand);
-		i++;
-	}
-	return (NULL);
+	return (search_command_in_paths(cmd, paths));
 }
 
 char	*join3(const char *a, const char *b, const char *c)
 {
-	int		la;
-	int		lb;
-	int		lc;
+	int		total_len;
 	int		i;
 	char	*s;
 
-	if (!a)
-		a = "";
-	if (!b)
-		b = "";
-	if (!c)
-		c = "";
-	la = ft_strlen(a);
-	lb = ft_strlen(b);
-	lc = ft_strlen(c);
-	s = (char *)malloc(la + lb + lc + 1);
+	total_len = calculate_total_length(a, b, c);
+	s = (char *)malloc(total_len + 1);
 	if (!s)
 		return (NULL);
 	i = 0;
-	while (*a)
+	while (a && *a)
 		s[i++] = *a++;
-	while (*b)
+	while (b && *b)
 		s[i++] = *b++;
-	while (*c)
+	while (c && *c)
 		s[i++] = *c++;
 	s[i] = '\0';
 	return (s);

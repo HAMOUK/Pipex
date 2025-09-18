@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlongin <hlongin@student.s19.be>           +#+  +:+       +#+        */
+/*   By: hlongin <hlongin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 12:41:11 by hlongin           #+#    #+#             */
-/*   Updated: 2025/09/04 14:09:30 by hlongin          ###   ########.fr       */
+/*   Updated: 2025/09/18 12:28:20 by hlongin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "pipex.h"
+#include "pipex.h"
 
 int	error(char *str)
 {
@@ -22,6 +22,6 @@ int	error(char *str)
 		write(2, &str[i], 1);
 		i++;
 	}
-	write(2, "\n", 1);	
+	write(2, "\n", 1);
 	return (1);
 }

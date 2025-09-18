@@ -6,7 +6,7 @@
 /*   By: hlongin <hlongin@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 17:51:07 by hlongin           #+#    #+#             */
-/*   Updated: 2025/08/11 14:46:22 by hlongin          ###   ########.fr       */
+/*   Updated: 2025/04/16 17:27:01 by hlongin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,3 +105,25 @@ char	**ft_split(const char *s, char c)
 	tab[ligne] = NULL;
 	return (tab);
 }
+/*#include <stdio.h>
+int	main(void)
+{
+	char	**res;
+	int		i;
+
+	i = 0;
+	res = ft_split("hello world 42!", ' ');
+	while (res[i])
+	{
+		printf("%s\n", res[i]);
+		free(res[i]);
+		i++;
+	}
+	free(res);
+	return (0);
+}*/
+/*while (s[i] == c)
+			i++;
+		start = &s[i];
+		while (s[i] && s[i] != c)
+			i++;*/

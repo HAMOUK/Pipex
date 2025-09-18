@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlongin <hlongin@student.s19.be>           +#+  +:+       +#+        */
+/*   By: hlongin <hlongin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/12 13:15:40 by hlongin           #+#    #+#             */
-/*   Updated: 2025/09/08 14:02:51 by hlongin          ###   ########.fr       */
+/*   Updated: 2025/09/18 12:47:02 by hlongin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	main(int argc, char **argv, char **envp)
 {
-	t_px px;
-	int status;
+	t_px	px;
+	int		status;
 
 	if (pars_args(argc, argv, &px))
 		return (EXIT_FAILURE);

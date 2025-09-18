@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlongin <hlongin@student.s19.be>           +#+  +:+       +#+        */
+/*   By: hlongin <hlongin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 17:12:36 by hlongin           #+#    #+#             */
-/*   Updated: 2025/09/08 14:13:02 by hlongin          ###   ########.fr       */
+/*   Updated: 2025/09/18 12:28:14 by hlongin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	free_tab(char **argv)
 	}
 	free(argv);
 }
+
 void	free_partial_tab(char **argv, int count)
 {
 	int	i;
