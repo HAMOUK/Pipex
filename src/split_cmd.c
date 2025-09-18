@@ -55,10 +55,13 @@ void	free_partial_tab(char **argv, int count)
 	if (!argv)
 		return ;
 	i = 0;
-	while (i < count && argv[i])
+	while (i < count)
 	{
-		free(argv[i]);
+		if (argv[i])
+		{
+			free(argv[i]);
+			argv[i] = NULL;
+		}
 		i++;
 	}
-	free(argv);
 }
